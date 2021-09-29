@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 // This is the data we will be using to create our articles. Look at it, then proceed to line 93.
 // OPTIONAL: if you're feeling adventurous, try to make this data an export from a different module, and import it here.
 // You can read about ES6 modules here: https://exploringjs.com/es6/ch_modules.html#sec_basics-of-es6-modules
@@ -89,28 +90,84 @@ const data = [
   }
 ];
 
-/*
-  Step 1: Write a component called 'articleMaker' to create an article.
-  Your component is a function that takes an article object as its only argument,
-  and returns a DOM node looking like the one below:
+const testArticle = {
+  title: 'this is a test title',
+  date: 'this is a test date',
+  firstParagraph: 'still a test',
+  secondParagraph: 'yes... still a test',
+  thirdParagraph: 'OMG back off, this is still a test!!!',
+}
+data.push(testArticle);
+console.log(data);
+  // Step 1: Write a component called 'articleMaker' to create an article.
+  // Your component is a function that takes an article object as its only argument,
+  // and returns a DOM node looking like the one below:
 
-  <div class="article">
-    <h2>{title of the article}</h2>
-    <p class="date">{date of the article}</p>
+  // <div class="article">
+  //   <h2>{title of the article}</h2>
+  //   <p class="date">{date of the article}</p>
 
-    {three separate paragraph elements}
+  //   {three separate paragraph elements}
 
-    <span class="expandButton">+</span>
-  </div>
+  //   <span class="expandButton">+</span>
+  // </div>
+const articles = document.querySelector('.articles')
+function articleMaker(a){
+  const title = a.title;
+  const date = a.date;
+  const first = a.firstParagraph;
+  const second = a.secondParagraph;
+  const third = a.thirdParagraph
 
-  Step 2: Still inside `articleMaker`, add an event listener to the span.expandButton.
-  This listener should toggle the class 'article-open' on div.article.
+  const article = document.createElement('div');
+  const articleTitle = document.createElement('h2');
+  const articleDate = document.createElement('p')
+  const firstPar = document.createElement('p');
+  const secondPar = document.createElement('p');
+  const thirdPar = document.createElement('p');
+  const expandButton = document.createElement('span');
 
-  Step 3: Don't forget to return something from your function!
+  article.appendChild(articleTitle);
+  article.appendChild(articleDate);
+  article.appendChild(firstPar);
+  article.appendChild(secondPar);
+  article.appendChild(thirdPar);
+  article.appendChild(expandButton);
 
-  Step 4: Outside your function now, loop over the data. At each iteration you'll use your component
-  to create a div.article element and append it to the DOM inside div.articles (see index.html).
+  article.classList.add('article');
+  expandButton.classList.add('expandButton');
 
-  Step 5: Try adding new article object to the data array. Make sure it is in the same format as the others.
-  Refresh the page to see the new article.
-*/
+  articleTitle.textContent = title;
+  articleDate.textContent = date;
+  firstPar.textContent = first;
+  secondPar.textContent = second;
+  thirdPar.textContent = third;
+  expandButton.textContent = '+';
+
+
+  // Step 2: Still inside `articleMaker`, add an event listener to the span.expandButton.
+  // This listener should toggle the class 'article-open' on div.article.
+  expandButton.addEventListener('click', event => {
+    article.classList.toggle('article-open');
+  })
+  // Step 3: Don't forget to return something from your function!
+  return article;
+}  
+
+
+  // Step 4: Outside your function now, loop over the data. At each iteration you'll use your component
+  // to create a div.article element and append it to the DOM inside div.articles (see index.html).
+const newArticle = data.map(elem => {
+  return articleMaker(elem)
+})
+
+console.log(newArticle)
+
+newArticle.forEach(addArticle => {
+  articles.appendChild(addArticle)
+})
+
+  // Step 5: Try adding new article object to the data array. Make sure it is in the same format as the others.
+  // Refresh the page to see the new article.
+
+
