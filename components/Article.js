@@ -135,6 +135,7 @@ function articleMaker(a){
   article.appendChild(expandButton);
 
   article.classList.add('article');
+  articleDate.classList.add('date')
   expandButton.classList.add('expandButton');
 
   articleTitle.textContent = title;
