@@ -99,6 +99,18 @@ const testArticle = {
 }
 data.push(testArticle);
 console.log(data);
+
+function ArticleMachine(array, title, date, first, second, third){
+  const newAddition ={
+    title: title,
+    date: date,
+    firstParagraph: first,
+    secondParagraph: second,
+    thirdParagraph: third,
+  }
+  array.push(newAddition)
+}
+ArticleMachine(data, 'Bret is coool', 'Since 1985', 'like for reals, he is awesome', 'much better than he used to be!', 'he is great.')
   // Step 1: Write a component called 'articleMaker' to create an article.
   // Your component is a function that takes an article object as its only argument,
   // and returns a DOM node looking like the one below:
